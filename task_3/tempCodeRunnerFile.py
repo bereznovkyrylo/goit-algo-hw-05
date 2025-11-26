@@ -1,1 +1,1 @@
-count_logs_by_level
+urrent_dir=Path(__file__).parent

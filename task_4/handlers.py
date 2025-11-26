@@ -24,12 +24,7 @@ def add_contact(args,contacts):
     is_exist_contact=contacts.get(name,None)
 
     if is_exist_contact is not None:
-        answer=input(f'Contact with name {name} already exist. Do you want to update contact? y/n ').strip().lower()
-        if answer=='y':
-            return update_contact(args,contacts)
-        elif answer!='n':
-            raise KeyError
-
+        return f'Contact with name {name} already exist'
     else:            
         name,phone=args
         contacts[name]=phone
@@ -42,7 +37,8 @@ def update_contact(args,contacts):
     contacts[name]=phone
     return "Contact updated."
 @input_error
-def show_phone(name,contacts):
+def show_phone(args,contacts):
+    name=args[0]
     return contacts[name]
 @input_error
 def show_all(contacts):

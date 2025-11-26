@@ -32,11 +32,26 @@ def display_log_counts(counts: dict):
 
 
 from pathlib import Path
+import sys
 if __name__=='__main__':
-    current_dir=Path(__file__).parent
-    
-    dict_of_logs=count_logs_by_level(load_logs(current_dir/'logs.txt'))
-    display_log_counts(dict_of_logs)
+    try:
+        path =sys.argv[1]
+        
+        dict_of_logs=count_logs_by_level(load_logs(path))
+        display_log_counts(dict_of_logs)
+
+        if len(sys.argv)==3:
+            level=sys.argv[2].upper()
+            print(f"Деталі логів для рівня: '{level}': ")
+
+            with open(path,'r') as file:
+                for line in file.readlines():
+                    if level in line:
+                        print(line.replace(level,'-').strip())
+
+    except Exception as e:
+        print(e)
+        
 
 
 
